@@ -14,7 +14,7 @@
     <jar href="lib/datafx-core-1.0.jar" size="110552" download="eager" />
     <jar href="lib/org.OpenNI.jar" size="124770" download="eager" />
     <jar href="lib/postgresql-9.1-901.jdbc4.jar" size="540641" download="eager" />
-    <jar href="librasProject.jar" size="2349062" download="eager" />
+    <jar href="librasProject.jar" size="2349181" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="librasProject" >
     <param name="requiredFXVersion" value="2.2+"/>

@@ -19,6 +19,7 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import application.LibrasProject;
+import java.util.ArrayList;
 import learning.LearningController;
 
 /**
@@ -136,19 +137,33 @@ public class SelectionController extends AnchorPane implements Initializable {
      */
     public void setApp(LibrasProject application){
         this.application = application;
+        ResultSet rs;
+        Statement statement;
+        ObservableList<Node> children = anchorPane.getChildren();
+        ArrayList<String> lessons = new ArrayList<>();
+        ArrayList<String> complete = new ArrayList<>();
         
         try {
-            PreparedStatement pStatement = application.getConnection().prepareStatement("SELECT complete " 
-                                        + "FROM user_lesson WHERE lesson_id=? AND user_id='"
-                                        + this.application.getUserName()+"'");
-            ResultSet rs;
-            ObservableList<Node> children = anchorPane.getChildren();
+            statement = application.getConnection().createStatement();
+            rs = statement.executeQuery("SELECT lesson_id FROM lesson");
+            while(rs.next()) {
+                lessons.add(rs.getString("lesson_id"));
+            }
+            
+            statement = application.getConnection().createStatement();
+            rs = statement.executeQuery("SELECT lesson_id FROM user_lesson WHERE "
+                    + "complete=true AND user_id='" + this.application.getUserName()+"'");
+            
+            while(rs.next()) {
+                complete.add(rs.getString("lesson_id"));
+            }
+            
             for (int i = 0; i < children.size(); i++) {
                 if (children.get(i).getClass() == Group.class) {
-                    pStatement.setString(1, children.get(i).getId());
-                    rs = pStatement.executeQuery();
-                    while (rs.next()) {
-                       if (rs.getBoolean("complete")){
+                    if (!lessons.contains(children.get(i).getId())) {
+                       children.get(i).setDisable(true);
+                    }
+                    if (complete.contains(children.get(i).getId())) {
                             ObservableList<Node> groupChildren = ((Group)children.get(i)).getChildren();
                             for (int j = 0; j < groupChildren.size(); j++) {
                                if ("done".equals(groupChildren.get(j).getId())) {
@@ -159,8 +174,7 @@ public class SelectionController extends AnchorPane implements Initializable {
                     }
                     
                 }
-            }
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(SelectionController.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
