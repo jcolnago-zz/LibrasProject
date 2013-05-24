@@ -3,13 +3,13 @@ LibrasProject
 To use the LibrasProject you need to have the ListeningServer and GestureUI running as well as have created a postgresql database based on the LibrasProject/librasProject/database.backup file.  
   * On installing PostgreSQL on Ubuntu 12.04: https://www.digitalocean.com/community/articles/how-to-install-and-use-postgresql-on-ubuntu-12-04
 
+You must also have JavaFX:  
+  * http://www.wikihow.com/Install-JavaFX-on-Ubuntu-Linux
+
 You must then set the values on the LibrasProject/librasProject/librasproject/lessonResources/config.properties accordingly.  
 The server and port values are related to the ListeningServer.   
 
 **These values must be the same for the GestureUI NetworkConfig tab.**  
-
-You must also have JavaFX:  
-  * http://www.wikihow.com/Install-JavaFX-on-Ubuntu-Linux
 
     
 ListeningServer
