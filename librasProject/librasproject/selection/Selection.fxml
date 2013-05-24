@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="369.9999000000025" prefWidth="465.0" xmlns:fx="http://javafx.com/fxml" fx:controller="selection.SelectionController">
+  <children>
+    <Label layoutX="62.0" prefHeight="32.0" prefWidth="352.3138427734375" text="Para selecionar uma aula, clique em uma das imagens abaixo." wrapText="true" AnchorPane.topAnchor="66.0" />
+    <Button fx:id="button" cancelButton="true" layoutX="62.0" onAction="#handleCloseButtonAction" prefHeight="32.0" prefWidth="85.0" text="Sair" AnchorPane.topAnchor="307.0" />
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" prefWidth="353.0" text="Learning LiBraS" AnchorPane.topAnchor="14.0">
+      <font>
+        <Font name="Calibri" size="42.0" />
+      </font>
+    </Label>
+    <Group id="Vogais" layoutX="62.0" onMouseClicked="#handleSelectionMouseAction" onMouseEntered="#handleSelectionMouseAction" onMouseExited="#handleSelectionMouseAction" opacity="0.5" AnchorPane.topAnchor="112.0">
+      <children>
+        <ImageView id="Vogais" fitHeight="84.31388458251953" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../lessonResources/menuImages/vowels.jpg" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label layoutX="25.0" layoutY="84.0" opacity="0.5" text="Vogais">
+          <font>
+            <Font name="System Bold" size="12.0" fx:id="x1" />
+          </font>
+        </Label>
+        <ImageView id="done" fitHeight="15.9609375" fitWidth="15.9609375" layoutX="35.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../lessonResources/menuImages/done.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+      </children>
+    </Group>
+    <Group id="Consoantes" layoutX="190.0" onMouseClicked="#handleSelectionMouseAction" onMouseEntered="#handleSelectionMouseAction" onMouseExited="#handleSelectionMouseAction" opacity="0.5" AnchorPane.topAnchor="112.0">
+      <children>
+        <ImageView id="Consoantes" fitHeight="84.31388458251953" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../lessonResources/menuImages/alphabet.jpg" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" layoutY="82.0" opacity="0.5" prefHeight="15.9609375" prefWidth="84.3138427734375" text="Consoantes" />
+        <ImageView id="done" fitHeight="15.9609375" fitWidth="15.9609375" layoutX="35.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../lessonResources/menuImages/done.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+      </children>
+    </Group>
+    <Group id="Frutas" layoutX="330.0" onMouseClicked="#handleSelectionMouseAction" onMouseEntered="#handleSelectionMouseAction" onMouseExited="#handleSelectionMouseAction" opacity="0.5" AnchorPane.topAnchor="242.0">
+      <children>
+        <ImageView id="Frutas" fitHeight="84.31388458251953" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../lessonResources/menuImages/fruits.jpg" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label font="$x1" layoutX="27.0" layoutY="84.0" opacity="0.5" text="Frutas" />
+        <ImageView id="done" fitHeight="15.9609375" fitWidth="15.9609375" layoutX="35.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../lessonResources/menuImages/done.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+      </children>
+    </Group>
+    <Group id="Esportes" layoutX="190.0" onMouseClicked="#handleSelectionMouseAction" onMouseEntered="#handleSelectionMouseAction" onMouseExited="#handleSelectionMouseAction" opacity="0.5" AnchorPane.topAnchor="242.0">
+      <children>
+        <ImageView id="Esportes" fitHeight="84.31388458251953" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../lessonResources/menuImages/sports.jpg" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label font="$x1" layoutX="19.0" layoutY="84.0" opacity="0.5" text="Esportes" />
+        <ImageView id="done" fitHeight="15.9609375" fitWidth="15.9609375" layoutX="35.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../lessonResources/menuImages/done.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+      </children>
+    </Group>
+    <Group id="Transporte" layoutX="305.0" layoutY="112.0" onMouseClicked="#handleSelectionMouseAction" onMouseEntered="#handleSelectionMouseAction" onMouseExited="#handleSelectionMouseAction" opacity="0.5">
+      <children>
+        <ImageView id="Transporte" fitHeight="84.31388458251953" fitWidth="127.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../lessonResources/menuImages/transportation.jpg" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label alignment="CENTER" contentDisplay="CENTER" font="$x1" layoutX="5.0" layoutY="84.0" opacity="0.5" prefWidth="128.3138427734375" text="Meios de Transporte" />
+        <ImageView id="done" fitHeight="15.9609375" fitWidth="15.9609375" layoutX="65.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
+          <image>
+            <Image url="@../lessonResources/menuImages/done.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+      </children>
+    </Group>
+  </children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0" prefWidth="500.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="login.LoginController">
+  <children>
+    <AnchorPane id="anchorPane2" prefHeight="300.0" prefWidth="500.0" styleClass="top-segment" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="-1.5" AnchorPane.rightAnchor="1.5" AnchorPane.topAnchor="33.0">
+      <children>
+        <VBox id="VBox" alignment="CENTER" prefHeight="300.0" prefWidth="421.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane id="AnchorPane" prefHeight="275.0" prefWidth="431.0">
+              <children>
+                <Label id="label1" layoutX="14.0" layoutY="96.0" text="Usuário" />
+                <TextField id="textField1" fx:id="userId" layoutY="115.0" prefWidth="415.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" />
+                <Label id="label1" layoutX="14.0" layoutY="168.0" text="Senha" />
+                <PasswordField id="passwordField1" fx:id="password" layoutY="186.0" prefWidth="415.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" />
+                <Label layoutX="152.0" minHeight="70.0" prefHeight="70.0" text="Login">
+                  <font>
+                    <Font size="52.0" />
+                  </font>
+                </Label>
+              </children>
+            </AnchorPane>
+          </children>
+        </VBox>
+      </children>
+    </AnchorPane>
+    <Button fx:id="login" defaultButton="true" layoutX="208.0" layoutY="268.0" mnemonicParsing="false" onAction="#processLogin" prefHeight="38.0" prefWidth="85.0" text="Login" />
+    <Button fx:id="register" layoutX="315.0" layoutY="268.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="38.0" prefWidth="85.0" text="Cadastro" />
+    <HBox id="hBox1" alignment="CENTER" prefHeight="25.0" prefWidth="418.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="45.5" AnchorPane.rightAnchor="36.5">
+      <children>
+        <Label id="label2" fx:id="errorMessage" />
+      </children>
+    </HBox>
+    <Button id="login" cancelButton="true" layoutX="101.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="38.0" prefWidth="85.0" text="Sair" />
+  </children>
+</AnchorPane>

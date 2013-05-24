@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="librasProject.jnlp">
+  <information>
+    <title>librasProject</title>
+    <vendor>jcolnago</vendor>
+    <description>Sample JavaFX 2.0 application.</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib/datafx-core-1.0.jar" size="110552" download="eager" />
+    <jar href="lib/org.OpenNI.jar" size="124770" download="eager" />
+    <jar href="lib/postgresql-9.1-901.jdbc4.jar" size="540641" download="eager" />
+    <jar href="librasProject.jar" size="2349062" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="librasProject" >
+    <param name="requiredFXVersion" value="2.2+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="application.LibrasProject"  name="librasProject" />
+  <update check="always"/>
+</jnlp>

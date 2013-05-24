@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="120.0" prefWidth="285.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <Label fx:id="Text" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="257.0" text="Parabéns!">
+      <font>
+        <Font name="System Bold" size="32.0" />
+      </font>
+    </Label>
+    <Label id="Text" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="60.0" prefHeight="46.0" prefWidth="257.0" text="Nada mais para fazer." />
+  </children>
+</AnchorPane>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lessons>
+	<Lesson name="Vogais">
+		<LessonComponent name="A">
+			<Video>lessonResources/Videos/a.m4v</Video>
+			<Image name="A1">lessonResources/lessonImages/A1.jpg</Image>
+			<Image name="A2">lessonResources/lessonImages/A2.jpg</Image>
+			<Image name="A3">lessonResources/lessonImages/A3.jpg</Image>
+			<Image name="A4">lessonResources/lessonImages/A4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+        <LessonComponent name="E">
+			<Video>lessonResources/Videos/e.m4v</Video>
+			<Image name="E1">lessonResources/lessonImages/E1.jpg</Image>
+			<Image name="E2">lessonResources/lessonImages/E2.jpg</Image>
+			<Image name="E3">lessonResources/lessonImages/E3.jpg</Image>
+			<Image name="E4">lessonResources/lessonImages/E4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+        <LessonComponent name="I">
+			<Video>lessonResources/Videos/i.m4v</Video>
+			<Image name="I1">lessonResources/lessonImages/I1.jpg</Image>
+			<Image name="I2">lessonResources/lessonImages/I2.jpg</Image>
+			<Image name="I3">lessonResources/lessonImages/I3.jpg</Image>
+			<Image name="I4">lessonResources/lessonImages/I4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+		<LessonComponent name="O">
+			<Video>lessonResources/Videos/o.m4v</Video>
+			<Image name="O1">lessonResources/lessonImages/O1.jpg</Image>
+			<Image name="O2">lessonResources/lessonImages/O2.jpg</Image>
+			<Image name="O3">lessonResources/lessonImages/O3.jpg</Image>
+			<Image name="O4">lessonResources/lessonImages/O4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+		<LessonComponent name="U">
+			<Video>lessonResources/Videos/u.m4v</Video>
+			<Image name="U1">lessonResources/lessonImages/U1.jpg</Image>
+			<Image name="U2">lessonResources/lessonImages/U2.jpg</Image>
+			<Image name="U3">lessonResources/lessonImages/U3.jpg</Image>
+			<Image name="U4">lessonResources/lessonImages/U4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+	</Lesson>
+	<Lesson name="Consoantes">
+		<LessonComponent name="B">
+			<Video>lessonResources/Videos/b.m4v</Video>
+			<Image name="B1">lessonResources/lessonImages/B1.jpg</Image>
+			<Image name="B2">lessonResources/lessonImages/B2.jpg</Image>
+			<Image name="B3">lessonResources/lessonImages/B3.jpg</Image>
+			<Image name="B4">lessonResources/lessonImages/B4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+        <LessonComponent name="C">
+			<Video>lessonResources/Videos/c.m4v</Video>
+			<Image name="C1">lessonResources/lessonImages/C1.jpg</Image>
+			<Image name="C2">lessonResources/lessonImages/C2.jpg</Image>
+			<Image name="C3">lessonResources/lessonImages/C3.jpg</Image>
+			<Image name="C4">lessonResources/lessonImages/C4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+        <LessonComponent name="F">
+			<Video>lessonResources/Videos/f.m4v</Video>
+			<Image name="F1">lessonResources/lessonImages/F1.jpg</Image>
+			<Image name="F2">lessonResources/lessonImages/F2.jpg</Image>
+			<Image name="F3">lessonResources/lessonImages/F3.jpg</Image>
+			<Image name="F4">lessonResources/lessonImages/F4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+		<LessonComponent name="L">
+			<Video>lessonResources/Videos/l.m4v</Video>
+			<Image name="L1">lessonResources/lessonImages/L1.jpg</Image>
+			<Image name="L2">lessonResources/lessonImages/L2.jpg</Image>
+			<Image name="L3">lessonResources/lessonImages/L3.jpg</Image>
+			<Image name="L4">lessonResources/lessonImages/L4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+		<LessonComponent name="V">
+			<Video>lessonResources/Videos/v.m4v</Video>
+			<Image name="V1">lessonResources/lessonImages/V1.jpg</Image>
+			<Image name="V2">lessonResources/lessonImages/V2.jpg</Image>
+			<Image name="V3">lessonResources/lessonImages/V3.jpg</Image>
+			<Image name="V4">lessonResources/lessonImages/V4.jpg</Image>
+			<ExtraInformation/>
+		</LessonComponent>
+	</Lesson>
+</Lessons>
