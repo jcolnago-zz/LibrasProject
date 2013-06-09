@@ -2,18 +2,18 @@ LibrasProject
 =============
 To use the LibrasProject you need to have the ListeningServer and GestureUI running as well as have created a postgresql database based on the LibrasProject/librasProject/database.backup file.  
   
-  * On installing PostgreSQL on Ubuntu 12.04 and creating the database:
-  sudo apt-get install postgresql
+  * On installing PostgreSQL on Ubuntu 12.04 and creating the database:  
+  sudo apt-get install postgresql  
 
-  // Change the PostgreSQL postgres user paswword
-  sudo -u postgres psql postgres
-  \password postgres
+  // Change the PostgreSQL postgres user paswword  
+  sudo -u postgres psql postgres  
+  \password postgres  
   
-  // Create DB
-  sudo -u postgres createdb librasProject
+  // Create DB  
+  sudo -u postgres createdb librasProject  
   
-  // restore DB
-  pg_restore -d librasProject -h localhost -p 5432 -U postgres -W database.backup
+  // restore DB  
+  pg_restore -d librasProject -h localhost -p 5432 -U postgres -W database.backup  
 
 You must also have JavaFX if you plan on developing more uis:  
   * http://www.wikihow.com/Install-JavaFX-on-Ubuntu-Linux
