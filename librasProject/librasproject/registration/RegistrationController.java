@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import application.LibrasProject;
+import javafx.scene.control.Label;
 import validation.InputMaskValidation;
 
 /**
@@ -43,6 +44,8 @@ public class RegistrationController extends AnchorPane implements Initializable 
     RadioButton female, male, deaf, notDeaf;
     @FXML
     Button register;
+    @FXML
+    Label message;
 
     
     /**
@@ -124,15 +127,17 @@ public class RegistrationController extends AnchorPane implements Initializable 
                     + userId.getText() + "','" + passw.getText() + "','"
                     + Integer.parseInt(age.getText()) + "','" + gender + "','"
                     + type + "')");
+            
+            /* Insert related information into database */
+            insertUserLesson(userId.getText());
+            insertReviewComponents(userId.getText());
+            /* After it is done, return to the login page */
+            application.gotoLogin();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        /* Insert related information into database */
-        insertUserLesson(userId.getText());
-        insertReviewComponents(userId.getText());
-        /* After it is done, return to the login page */
-        application.gotoLogin();
+            message.setText("Usuario ja cadastrado.");
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
 
@@ -160,7 +165,8 @@ public class RegistrationController extends AnchorPane implements Initializable 
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            message.setText("Problema na insercao dos dados do usuario. Tente novamente.");
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -187,7 +193,8 @@ public class RegistrationController extends AnchorPane implements Initializable 
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            message.setText("Problema na insercao dos dados do usuario. Tente novamente.");
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -70,12 +70,12 @@ public class SelectionController extends AnchorPane implements Initializable {
             while(rs.next()) {
                 daysDiff = (Calendar.getInstance().getTimeInMillis()-rs.getDate("last_reviewed").getTime())/(1000*60*60*24);
                 if (rs.getInt("mistakes")*2 + daysDiff  > 6 && !inReview) {
-                    application.gotoReview(lessonName);
+                    application.gotoReview(lessonName, true);
                     inReview = true;
                 }
             }
             if(!inReview) {
-                (new LearningController()).showMessageBox();
+                (new LearningController()).showMessageBox("Parabéns!", "Não há mais nada para ser feito!");
             }            
         } catch (SQLException ex) {
             Logger.getLogger(SelectionController.class.getName()).log(Level.SEVERE, null, ex);

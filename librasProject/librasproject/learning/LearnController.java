@@ -2,10 +2,7 @@ package learning;
 
 import kinect.ViewerPanel;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,17 +18,24 @@ import application.LibrasProject;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * This class is responsible for the control of the Lessons scene.
  * 
  * @author Jessica H. Colnago
  */
-public class LessonsController extends LearningController implements Initializable {
+public class LearnController extends LearningController implements Initializable {
     
     /* Class variables */
-    private RecognitionThread recognition;
+    private LearnThread learn;
+    private MemorizeThread memorize;
     public final Object waitVideo = new Object();
+    public final Object waitVerification = new Object();
+    public boolean isCorrect = false;
     private ViewerPanel vp;
     
     /* FXML id for the different ui components */
@@ -39,6 +43,7 @@ public class LessonsController extends LearningController implements Initializab
     Pane Video;
     @FXML
     Button Play;
+    
    
     
     /**
@@ -48,7 +53,7 @@ public class LessonsController extends LearningController implements Initializab
      */
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
-        recognition.cancel();
+        learn.cancel();
         vp.closeDown();
         application.gotoSelection();    // returns to the selection scene
     }
@@ -66,6 +71,22 @@ public class LessonsController extends LearningController implements Initializab
     }
     
     
+   /**
+     * Checks if the element clicked is the correct one.
+     * 
+     * @param event the action event information
+     */
+    @FXML
+    private void checkIfCorrect(MouseEvent event) {
+        ImageView image = (ImageView)event.getSource(); 
+        isCorrect = image.getId().equals(currentComponent);
+        System.out.println(image.getId()+","+currentComponent+","+isCorrect);
+        synchronized(waitVerification) {
+            waitVerification.notify();  
+       } 
+    }
+    
+    
     /**
      * Sets up the application and any other work that needs to be done on start
      * up.
@@ -73,7 +94,7 @@ public class LessonsController extends LearningController implements Initializab
      * @param application responsible for the scene
      * @param lessonName lesson's name that needs to be loaded
      */
-    public void setApp(LibrasProject application, String lessonName) throws SQLException {
+    public void setApp(LibrasProject application, String lessonName) throws SQLException {        
         this.application = application;
         this.lessonName = lessonName;
         progress = 0;
@@ -89,10 +110,11 @@ public class LessonsController extends LearningController implements Initializab
         th1.setDaemon(true);
         th1.start();   // start updating the panel's image
         
-        recognition = new RecognitionThread(this);
-        Thread th = new Thread(recognition);
+        learn = new LearnThread(this);
+        Thread th = new Thread(learn);
         th.setDaemon(true);
-        th.start();        
+        th.start();  
+
     }
       
 
@@ -124,7 +146,7 @@ public class LessonsController extends LearningController implements Initializab
             mediaView.setPreserveRatio(false);
             Video.getChildren().add(mediaView);
         } catch (URISyntaxException ex) {
-            Logger.getLogger(LessonsController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LearnController.class.getName()).log(Level.SEVERE, null, ex);
         }
    
     }
@@ -157,52 +179,7 @@ public class LessonsController extends LearningController implements Initializab
     public Duration getVideoDuration() {
        return ((MediaView)Video.getChildren().get(0)).getMediaPlayer().getMedia().getDuration();
     }
-    
-    
-    /**
-     * This function creates a list of lesson components obtaining the its values
-     * from the database based on the lessonName.
-     * 
-     * @param components a list of lesson components
-     * @return an array list of lessonComponents
-     */
-    private ArrayList<LessonComponent> getLessonInformation() throws SQLException {
-        Statement statement = application.getConnection().createStatement();
-        ResultSet rs;
-        
-        /* Creates a temporary list */
-        ArrayList<LessonComponent> lessonList = new ArrayList<>();
-        
-        rs = statement.executeQuery("SELECT component_id, "
-                + "video_path, extra_information FROM component "
-                + "WHERE lesson_id='" + lessonName + "'");
-        
-        /* Iterate over every component */
-        while(rs.next()) {
-            Statement statementImages = application.getConnection().createStatement();
-            ResultSet rsImages;
-            
-            ArrayList<String> imageList = new ArrayList<>();
-            String videoPath = rs.getString("video_path");
-            String componentName = rs.getString("component_id");
-            String extraInfo = rs.getString("extra_information");
-            LessonComponent lessonElement;
-                        
-            rsImages = statementImages.executeQuery("SELECT image_path "
-                    + " FROM image AS i, component_image AS ci WHERE i.image_id="
-                    + "ci.image_id AND component_id='" + componentName + "'");
-            while(rsImages.next()) {
-                imageList.add(rsImages.getString("image_path"));
-            }
-            
-            /* Creates a lesson object */
-            lessonElement = new LessonComponent(imageList, videoPath, componentName, extraInfo);
-            /* Adds it to the lesson list to be returned */
-            lessonList.add(lessonElement);      
-        }
-        return lessonList;       
-    }
-    
+
     
     /**
      * This function sets the value for the new element to be shown and if all
@@ -223,11 +200,73 @@ public class LessonsController extends LearningController implements Initializab
             currentComponent = setUpLessonComponents(index);         
         }
         else {
-            showMessageBox();
+            /* Part one has finished */
+            application.gotoMemorize(lessonName);
         }
     }
     
     
+    /**
+     * This function sets the value for the new element to be shown and if all
+     * elements have already been shown, display the "done" message.
+     */
+    public void showNextElementMemorize() {
+        int index;
+        Random r = new Random();
+        
+        Progress.setProgress(progress);
+        
+        if (!lessonComponents.isEmpty()) {
+           /* Defines new random lesson component */
+            index = r.nextInt(lessonComponents.size());
+            /* In case of the lessonsController set up the video */
+            setVideo(lessonComponents.get(index).getVideo());
+            currentComponent = lessonComponents.get(index).getLessonComponentName();
+            lessonComponents.remove(index); 
+        }
+        else {
+            /* Part one has finished */
+            application.gotoReview(lessonName, false);
+        }
+    }
+    
+        
+    /**
+     * Sets up the memorize part of the lesson.
+     * 
+     * @param application responsible for the scene
+     * @param lessonName lesson's name that needs to be loaded
+     */
+    public void setMemorize(LibrasProject application, String lessonName) throws SQLException {       
+        this.application = application;
+        this.lessonName = lessonName;
+        progress = 0;
+        
+        /* Get the information from these components*/
+        lessonComponents = getLessonInformation();
+        total = lessonComponents.size();      
+                
+        Image1.setImage(new Image(LibrasProject.class.getClassLoader().getResourceAsStream(lessonComponents.get(0).getImages().get(0))));
+        Image1.setId(lessonComponents.get(0).getLessonComponentName());
+        Image2.setImage(new Image(LibrasProject.class.getClassLoader().getResourceAsStream(lessonComponents.get(1).getImages().get(0))));
+        Image2.setId(lessonComponents.get(1).getLessonComponentName());
+        Image3.setImage(new Image(LibrasProject.class.getClassLoader().getResourceAsStream(lessonComponents.get(2).getImages().get(0))));
+        Image3.setId(lessonComponents.get(2).getLessonComponentName());
+        Image4.setImage(new Image(LibrasProject.class.getClassLoader().getResourceAsStream(lessonComponents.get(3).getImages().get(0))));
+        Image4.setId(lessonComponents.get(3).getLessonComponentName());
+        Image5.setImage(new Image(LibrasProject.class.getClassLoader().getResourceAsStream(lessonComponents.get(4).getImages().get(0))));
+        Image5.setId(lessonComponents.get(4).getLessonComponentName());
+        
+        showNextElementMemorize();
+               
+        memorize = new MemorizeThread(this);
+        Thread th = new Thread(memorize);
+        th.setDaemon(true);
+        th.start();
+        
+    }
+      
+       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

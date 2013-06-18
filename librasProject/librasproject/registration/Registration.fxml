@@ -52,7 +52,8 @@
         <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Button fx:id="register" defaultButton="true" layoutX="265.0" layoutY="344.0" mnemonicParsing="false" onAction="#addUser" prefHeight="33.0" prefWidth="109.0" text="Cadastrar" />
-    <Button layoutX="141.0" layoutY="344.0" mnemonicParsing="false" onAction="#back2Login" prefHeight="33.0" prefWidth="109.0" text="Voltar" />
+    <Label fx:id="message" maxWidth="500.0" minWidth="500.0" layoutX="0.0" layoutY="330.0" alignment="CENTER" wrapText="true"  />
+    <Button fx:id="register" defaultButton="true" layoutX="265.0" layoutY="360.0" mnemonicParsing="false" onAction="#addUser" prefHeight="33.0" prefWidth="109.0" text="Cadastrar" />
+    <Button layoutX="141.0" layoutY="360.0" mnemonicParsing="false" onAction="#back2Login" prefHeight="33.0" prefWidth="109.0" text="Voltar" />
   </children>
 </AnchorPane>

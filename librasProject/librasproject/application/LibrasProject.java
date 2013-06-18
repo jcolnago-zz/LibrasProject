@@ -3,7 +3,7 @@ package application;
 import learning.ReviewController;
 import selection.SelectionController;
 import registration.RegistrationController;
-import learning.LessonsController;
+import learning.LearnController;
 import login.LoginController;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -159,8 +159,23 @@ public class LibrasProject extends Application {
      */
     public void gotoLessons(String lessonName) {
         try {
-            LessonsController lessons = (LessonsController) replaceSceneContent("/learning/Lessons.fxml");
+            LearnController lessons = (LearnController) replaceSceneContent("/learning/Learn.fxml");
             lessons.setApp(this, lessonName);
+        } catch (Exception ex) {
+            Logger.getLogger(LibrasProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    /**
+     * Loads the controller for the Lessons scene based on the .fxml file.
+     * 
+     * @param lessonName the lesson name of the lesson to be initialized
+     */
+    public void gotoMemorize(String lessonName) {
+        try {
+            LearnController lessons = (LearnController) replaceSceneContent("/learning/Memorize.fxml");
+            lessons.setMemorize(this, lessonName);
         } catch (Exception ex) {
             Logger.getLogger(LibrasProject.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -170,10 +185,10 @@ public class LibrasProject extends Application {
     /**
      * Loads the controller for the review scene based on the .fxml file. 
      */
-    public void gotoReview(String lessonName) {
+    public void gotoReview(String lessonName, boolean isReview) {
         try {
            ReviewController review = (ReviewController) replaceSceneContent("/learning/Review.fxml");
-            review.setApp(this, lessonName);
+           review.setApp(this, lessonName, isReview);
         } catch (Exception ex) {
             Logger.getLogger(LibrasProject.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
@@ -16,14 +17,14 @@ import javafx.scene.paint.Color;
  * 
  * @author Jessica H. Colnago
  */
-public class ReviewBehaviorThread extends Task<Void> {
+public class ReviewThread extends Task<Void> {
 
     /* Class variables */
     private ReviewController controller;
     public ArrayList<LessonComponent> reviews;
     public String extraInformation;
     public List<String> images;
-    public boolean reviewAny = true;
+    public boolean review;
     
     
     /**
@@ -31,8 +32,9 @@ public class ReviewBehaviorThread extends Task<Void> {
      * @params the reviewController that starts the thread and the review it
      * should run.
      */
-    ReviewBehaviorThread(ReviewController controller) {
+    ReviewThread(ReviewController controller, boolean review) {
         this.controller = controller;
+        this.review = review;
     }
     
     
@@ -43,7 +45,9 @@ public class ReviewBehaviorThread extends Task<Void> {
     @Override
     protected Void call() throws Exception {      
         boolean result;
+        String recognized;
         PreparedStatement pStatement;
+        Statement statement;
         
         int mistakes = 0;
         int iterations = controller.lessonComponents.size();
@@ -59,19 +63,24 @@ public class ReviewBehaviorThread extends Task<Void> {
                 + controller.application.getUserName() + "';");
         
         while (iterations >= 0) {
+            
             /* Waits for the user to be ready */
+            controller.setActiveCircle(Color.RED);
             synchronized(controller.ready) {
                 controller.ready.wait(); 
             }
 
+            controller.Recognized.setText("");
+            
             /* Indicate the user can start */
-            controller.setBorderStrokeColor(Color.GREEN);
+            controller.setActiveCircle(Color.GREEN);
             out.println("START");
             Thread.sleep(3000);  // In order to get the predominant value recognized
             out.println("STOP");
-
-            result = in.readLine().equalsIgnoreCase(controller.currentComponent);
-
+ 
+            recognized = in.readLine();
+            result = recognized.equalsIgnoreCase(controller.currentComponent);
+                      
             if (result) {
                 /* Update the review_component with the amout of mistakes made */
                 pStatement.setInt(1, mistakes);
@@ -83,18 +92,24 @@ public class ReviewBehaviorThread extends Task<Void> {
                     public void run() {
                       controller.progress+=1/controller.total;
                       controller.showNextElement();
-                      controller.setBorderStrokeColor(Color.BLACK);
+                      controller.setActiveCircle(Color.RED);
                     }
                 });  
                 iterations--;
                 mistakes = 0;
             }
             else {
-                controller.setBorderStrokeColor(Color.RED);
+                controller.Recognized.setText(recognized);
                 Thread.sleep(1000);
                 mistakes++;
-                controller.setBorderStrokeColor(Color.BLACK);
+                controller.setActiveCircle(Color.RED);
             }          
+        }
+        if (!review) {
+            statement = controller.application.getConnection().createStatement();
+            statement.executeUpdate("UPDATE user_lesson SET complete=true" 
+                + " WHERE lesson_id='" + controller.lessonName + "' AND user_id='"
+                + controller.application.getUserName() + "';");
         }
         in.close();
         out.close();
