@@ -1,9 +1,21 @@
 LibrasProject
 =============
 To use the LibrasProject you need to have the ListeningServer and GestureUI running as well as have created a postgresql database based on the LibrasProject/librasProject/database.backup file.  
-  * On installing PostgreSQL on Ubuntu 12.04: https://www.digitalocean.com/community/articles/how-to-install-and-use-postgresql-on-ubuntu-12-04
+  
+  * On installing PostgreSQL on Ubuntu 12.04 and creating the database:  
+  sudo apt-get install postgresql  
 
-You must also have JavaFX:  
+  // Change the PostgreSQL postgres user paswword  
+  sudo -u postgres psql postgres  
+  \password postgres  
+  
+  // Create DB  
+  sudo -u postgres createdb librasProject  
+  
+  // restore DB  
+  pg_restore -d librasProject -h localhost -p 5432 -U postgres -W database.backup  
+
+You must also have JavaFX if you plan on developing more uis:  
   * http://www.wikihow.com/Install-JavaFX-on-Ubuntu-Linux
 
 You must then set the values on the LibrasProject/librasProject/librasproject/lessonResources/config.properties accordingly.  
@@ -29,13 +41,13 @@ The GestureUI needs a couple of  steps to be ready for use:
     - Search for 'boost' and select: libboost-all-dev (1.48)  
 
   * Download   
-    - Get all the files necessary for this process is in the GestureUI-Installation folder.  
+    - All the files necessary for this process are inside the GestureUI-Installation folder.  
 
   * Kinect  
     - After connecting the kinect type on the terminal:  
         lsmod | grep kinect  
         sudo modprobe -r gspca_kinect (in case gspca_kinect was shown with the grep)  
-        sudo echo "blacklist gspca_kinect" >> /etc/modprobe,d/blacklist.conf  
+        sudo echo "blacklist gspca_kinect" >> /etc/modprobe.d/blacklist.conf  
 
   * Openni  
     - Unzip openni tar (create a folder)  
