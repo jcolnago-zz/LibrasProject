@@ -49,14 +49,19 @@ public class LearnThread extends Task<Void> {
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                
         while (iterations >= 0) {
-            
+        
             /* Waits for the video to be played */
             lc.setActiveCircle(Color.RED);
             synchronized(lc.waitVideo) {
                 lc.waitVideo.wait(); 
             }
-                        
-            lc.Recognized.setText("");
+            
+            Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                      lc.setRecognized("");
+                    }
+                });
             lc.setActiveCircle(Color.YELLOW);
 
             try {
@@ -73,7 +78,7 @@ public class LearnThread extends Task<Void> {
 
             recognized = in.readLine();
             result = recognized.equalsIgnoreCase(lc.currentComponent);
-            
+            System.out.println(recognized);
             if (result) {
                 
                 Platform.runLater(new Runnable() {
@@ -88,9 +93,16 @@ public class LearnThread extends Task<Void> {
                 iterations--;
             }
             else {
-                lc.Recognized.setText(recognized);
-                Thread.sleep(1000);
-                lc.setActiveCircle(Color.RED);
+                final String temp = recognized;
+                
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                      lc.setRecognized(temp);
+                    }
+                });
+                                
+                System.out.println("Ooopsie!");
             }
         }
                 

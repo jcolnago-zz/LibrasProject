@@ -64,6 +64,16 @@ public class LearningController extends AnchorPane {
 
     
     /**
+     * Sets up the text for the gesture Recognized.
+     * 
+     * @param recognized a string containing the recognized gesture
+     */
+    public void setRecognized(String recognized) {
+        Recognized.setText(recognized);
+    }
+    
+    
+    /**
      * Sets up the new images to be shown for the next lesson component.
      * 
      * @param fileLocation list of paths for the images to be shown

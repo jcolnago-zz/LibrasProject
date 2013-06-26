@@ -70,7 +70,12 @@ public class ReviewThread extends Task<Void> {
                 controller.ready.wait(); 
             }
 
-            controller.Recognized.setText("");
+            Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                      controller.setRecognized("");
+                    }
+             });
             
             /* Indicate the user can start */
             controller.setActiveCircle(Color.GREEN);
@@ -99,10 +104,16 @@ public class ReviewThread extends Task<Void> {
                 mistakes = 0;
             }
             else {
-                controller.Recognized.setText(recognized);
-                Thread.sleep(1000);
-                mistakes++;
-                controller.setActiveCircle(Color.RED);
+                final String temp = recognized;
+                
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                      controller.setRecognized(temp);
+                    }
+                });
+                                
+                System.out.println("Ooopsie!");
             }          
         }
         if (!review) {

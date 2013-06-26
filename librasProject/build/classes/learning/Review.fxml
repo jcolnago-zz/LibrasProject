@@ -29,7 +29,7 @@
     </Label>
     <ProgressBar fx:id="Progress" layoutX="255.0" layoutY="457.0" prefWidth="200.0" progress="0.0" />
     <Label layoutX="194.0" layoutY="18.0" text="Tente se lembrar do sinal correspondente." textAlignment="CENTER" />
-    <Label fx:id="Recognized" font="$x1" layoutX="455.0" layoutY="378.0" prefWidth="61.0" style="" text="" textFill="RED" />
+    <Label fx:id="Recognized" font="$x1" layoutX="455.0" layoutY="367.0" prefHeight="74.9998779296875" prefWidth="61.0" style="" text="" textFill="RED" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" disable="false" fill="#202020" height="125.0" layoutX="77.0" layoutY="-37.0" rotate="270.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
     <Circle fx:id="RedCircle" disable="false" fill="RED" layoutX="55.0" layoutY="25.0" opacity="0.3" radius="12.5" stroke="RED" strokeType="INSIDE" />
     <Circle fx:id="YellowCircle" fill="YELLOW" layoutX="93.0" layoutY="25.0" opacity="0.3" radius="13.0" stroke="YELLOW" strokeType="INSIDE" />

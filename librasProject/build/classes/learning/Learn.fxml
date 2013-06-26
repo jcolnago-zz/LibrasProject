@@ -30,7 +30,7 @@
     <Pane fx:id="Video" layoutX="361.0" layoutY="57.0" prefHeight="274.0" prefWidth="300.0" />
     <Button fx:id="Play" defaultButton="true" layoutX="466.0" layoutY="334.0" mnemonicParsing="false" onAction="#handlePlayButtonAction" prefHeight="33.0" text="Tocar video" />
     <Label layoutX="235.0" layoutY="14.0" minHeight="10.999900000002526" prefHeight="23.0" text="Repita o sinal mostrado no video." textAlignment="CENTER" />
-    <Label fx:id="Recognized" font="$x1" layoutX="580.0" layoutY="439.0" style="" text="" textFill="RED" />
+    <Label fx:id="Recognized" font="$x1" layoutX="559.0" layoutY="478.0" prefHeight="53.0" prefWidth="66.0" style="" text="" textFill="RED" />
     <Rectangle arcHeight="5.0" arcWidth="5.0" disable="false" fill="#202020" height="125.0" layoutX="89.0" layoutY="-32.0" rotate="270.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
     <Circle fx:id="RedCircle" fill="RED" layoutX="69.0" layoutY="30.0" opacity="0.3" radius="12.5" stroke="RED" strokeType="INSIDE" />
     <Circle fx:id="YellowCircle" fill="YELLOW" layoutX="107.0" layoutY="30.0" opacity="0.3" radius="13.0" stroke="YELLOW" strokeType="INSIDE" />
