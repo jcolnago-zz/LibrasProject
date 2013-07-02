@@ -158,7 +158,6 @@ public class ViewerPanel extends JPanel implements Runnable {
         int rowLen = imWidth * 3;    // number of bytes in each row
         for (int row = 0; row < imHeight; row++) {
             bbIdx = rowStart;
-            // System.out.println("bbIdx: " + bbIdx);
             for (int col = 0; col < imWidth; col++) {
               int pixR = pixelsRGB.get( bbIdx++ );
               int pixG = pixelsRGB.get( bbIdx++ );

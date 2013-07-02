@@ -78,7 +78,6 @@ public class LearnThread extends Task<Void> {
 
             recognized = in.readLine();
             result = recognized.equalsIgnoreCase(lc.currentComponent);
-            System.out.println(recognized);
             if (result) {
                 
                 Platform.runLater(new Runnable() {
@@ -100,9 +99,7 @@ public class LearnThread extends Task<Void> {
                     public void run() {
                       lc.setRecognized(temp);
                     }
-                });
-                                
-                System.out.println("Ooopsie!");
+                });            
             }
         }
                 

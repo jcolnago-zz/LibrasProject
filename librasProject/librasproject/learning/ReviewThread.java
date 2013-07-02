@@ -104,6 +104,7 @@ public class ReviewThread extends Task<Void> {
                 mistakes = 0;
             }
             else {
+                mistakes++;
                 final String temp = recognized;
                 
                 Platform.runLater(new Runnable() {
@@ -112,8 +113,6 @@ public class ReviewThread extends Task<Void> {
                       controller.setRecognized(temp);
                     }
                 });
-                                
-                System.out.println("Ooopsie!");
             }          
         }
         if (!review) {

@@ -80,7 +80,6 @@ public class LearnController extends LearningController implements Initializable
     private void checkIfCorrect(MouseEvent event) {
         ImageView image = (ImageView)event.getSource(); 
         isCorrect = image.getId().equals(currentComponent);
-        System.out.println(image.getId()+","+currentComponent+","+isCorrect);
         synchronized(waitVerification) {
             waitVerification.notify();  
        } 
